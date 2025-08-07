@@ -29,3 +29,19 @@ def obtener_bibliotecas():
     finally:
         cursor.close()
         conexion.close()
+
+def obtener_biblioteca():
+    conexion = obtener_conexion()
+    if not conexion:
+        return[]
+    try:
+        cursor = conexion.cursor()
+        cursor.execute("SELECCIONE ID_BIBLIOTECA, NOMBRE, UBICACION FROM biblioteca")
+        bibliotecas = cursor.fetchall()
+        return bibliotecas
+    except Exception as ex:
+        print("Error al obtener bibliotecas", ex)
+        return []
+    finally:
+        cursor.close()
+        conexion.close()
